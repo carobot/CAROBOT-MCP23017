@@ -33,9 +33,9 @@ SOFTWARE.
 
 // for ATtiny I2C
 #ifdef __AVR_ATtiny85__
-  #include <TinyWireM.h>
+    #include <TinyWireM.h>
 #else
-  #include <Wire.h>
+    #include <Wire.h>
 #endif
 
 #define MCP23017_ADDRESS 0x20

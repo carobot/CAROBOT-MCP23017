@@ -28,37 +28,37 @@ SOFTWARE.
  ***/
 
 #if defined(ARDUINO) && ARDUINO >= 100
-  #include <Arduino.h>
+    #include <Arduino.h>
 #else
-  #include <WProgram.h>
+    #include <WProgram.h>
 #endif
 
 // for ATtiny I2C
 #ifdef __AVR_ATtiny85__
-  #include <TinyWireM.h>
-  #define Wire TinyWireM
+    #include <TinyWireM.h>
+    #define Wire TinyWireM
 #else
-  #include <Wire.h>
+    #include <Wire.h>
 #endif
 
 #include "CAROBOT_MCP23017.h"
 
 /***
  * Helper functions to keep backward compatibility
-  ***/
+ ***/
 static inline void wire_write(uint8_t x) {
 #if ARDUINO >= 100
-	Wire.write((uint8_t) x);
+    Wire.write((uint8_t) x);
 #else
-	Wire.send(x);
+    Wire.send(x);
 #endif
 }
 
 static inline uint8_t wire_read(void) {
 #if ARDUINO >= 100
-	return Wire.read();
+    return Wire.read();
 #else
-	return Wire.receive();
+    return Wire.receive();
 #endif
 }
 
@@ -73,20 +73,20 @@ void CAROBOT_MCP23017::begin(void) {
  * Initialize the MCP23017 with the given I2C address
  ***/
 void CAROBOT_MCP23017::begin(uint8_t i2cAddress) {
-	i2cAddress = i2cAddress & 0x07;
+    i2cAddress = i2cAddress & 0x07;
 
-    Wire.begin();
+	Wire.begin();
 
-    // set all I/O to input
-    writeRegister(MCP23017_IODIRA, 0xFF);
+	// set all I/O to input
+	writeRegister(MCP23017_IODIRA, 0xFF);
 	writeRegister(MCP23017_IODIRB, 0xFF);
 
 	// set all I/O to default value
-    writeRegister(MCP23017_GPIOA, 0x00);
+	writeRegister(MCP23017_GPIOA, 0x00);
 	writeRegister(MCP23017_GPIOB, 0x00);
 
 	// set all pull-up to disable
-    writeRegister(MCP23017_GPPUA, 0x00);
+	writeRegister(MCP23017_GPPUA, 0x00);
 	writeRegister(MCP23017_GPPUB, 0x00);
 }
 
@@ -121,7 +121,7 @@ void CAROBOT_MCP23017::writeRegisterBit(uint8_t regAddress, uint8_t bit, uint8_t
 
 	regValue = bitWrite(regValue, bit, pinValue);
 
-    writeRegister(regAddress, regValue);
+	writeRegister(regAddress, regValue);
 }
 
 /***
