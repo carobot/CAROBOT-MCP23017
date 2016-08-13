@@ -159,7 +159,7 @@ void CAROBOT_MCP23017::pinMode(uint8_t pin, uint8_t mode) {
 
     uint8_t regIODIR = MCP23017_IODIRA;
     uint8_t regGPPU = MCP23017_GPPUA;
-    if (pin > 8) {
+    if (pin > 7) {
         regIODIR = MCP23017_IODIRB;
         regGPPU = MCP23017_GPPUB;
     }
@@ -186,7 +186,7 @@ void CAROBOT_MCP23017::digitalWrite(uint8_t pin, uint8_t state) {
     uint8_t regIODIR = MCP23017_IODIRA;
     uint8_t regGPPU = MCP23017_GPPUA;
     uint8_t regGPIO = MCP23017_GPIOA;
-    if (pin > 8) {
+    if (pin > 7) {
         regIODIR = MCP23017_IODIRB;
         regGPPU = MCP23017_GPPUB;
         regGPIO = MCP23017_GPIOB;
@@ -201,7 +201,7 @@ void CAROBOT_MCP23017::digitalWrite(uint8_t pin, uint8_t state) {
  * Read from a GPIO
  ***/
 uint8_t CAROBOT_MCP23017::digitalRead(uint8_t pin) {
-    if (pin > 8) {
+    if (pin > 7) {
         return (readRegister(MCP23017_GPIOB) >> pin % 8 & 0x01);
     } else {
         return (readRegister(MCP23017_GPIOA) >> pin % 8 & 0x01);
